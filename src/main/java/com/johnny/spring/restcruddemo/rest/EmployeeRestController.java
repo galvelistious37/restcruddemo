@@ -1,6 +1,5 @@
 package com.johnny.spring.restcruddemo.rest;
 
-import com.johnny.spring.restcruddemo.dao.EmployeeDAO;
 import com.johnny.spring.restcruddemo.entity.Employee;
 import com.johnny.spring.restcruddemo.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
