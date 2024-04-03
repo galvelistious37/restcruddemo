@@ -22,7 +22,19 @@ public class DemoSecurityConfig {
     public UserDetailsManager userDetailsManager(DataSource dataSource){
         // Tells Spring Security to use JDBC authentication with
         // our datasource... built in functionality
-        return new JdbcUserDetailsManager(dataSource);
+        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+
+        // Define query to retrieve a user by username
+        // when using custom DB tables for security
+        jdbcUserDetailsManager.setUsersByUsernameQuery("" +
+                "SELECT user_id, pw, active FROM members WHERE user_id = ?");
+
+        // Define a query to retrieve authority/roles by username
+        // when using custom DB tables for security
+        jdbcUserDetailsManager.setAuthoritiesByUsernameQuery("" +
+                "SELECT user_id, role FROM roles WHERE user_id = ?");
+
+        return jdbcUserDetailsManager;
     }
 
     /**
